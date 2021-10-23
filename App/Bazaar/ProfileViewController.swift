@@ -18,22 +18,18 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = Database.database().reference().child("Users")
+        let ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid )")
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard snapshot.exists() else { return }
             if(snapshot.exists()) {
-                let array = snapshot.children.allObjects
-                for obj in array {
-                    let snapshot:DataSnapshot = obj as! DataSnapshot
-                    if let childSnapshot = snapshot.value as? [String : AnyObject]
-                         {
-                        let name = childSnapshot["Name"] as! String
-                        let email = childSnapshot["Email"] as! String
-                        print(name)
-                        print(email)
-                        self.emailLabel.text = email
-                        self.nameLabel.text = name
-                    }
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    let name = childSnapshot["Name"] as! String
+                    let email = childSnapshot["Email"] as! String
+                    print(name)
+                    print(email)
+                    self.emailLabel.text = email
+                    self.nameLabel.text = name
                 }
             }
         }
