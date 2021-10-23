@@ -6,21 +6,34 @@
 //
 
 import UIKit
+import Firebase
 
-class ShopListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
+class ShopListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, UISearchBarDelegate {
     
-    
-    static var storeTappedOnList = Int()
+    @IBOutlet weak var searchBar: UISearchBar!
+    static var storeTappedOnList = String()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ShopListTableViewCell.identifier, for: indexPath) as? ShopListTableViewCell
         else { return UITableViewCell() }
         
-        cell.storeNameLabel.text = "Store Name \(indexPath[1] + 1)"
+        let ref = Database.database().reference().child("Stores").child("\(filteredData[indexPath.row])")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    cell.storeNameLabel.text = (childSnapshot["Name"] as! String)
+                    cell.storeLocDescLabel.text = "📍\((childSnapshot["Location"] as! String))  🏠\((childSnapshot["Industry"] as! String))"
+                }
+            }
+        }
+        
+        //cell.storeNameLabel.text = filteredData[indexPath.row]
         
         return cell
         
@@ -28,7 +41,9 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     @IBOutlet var tableView: UITableView!
-
+    var filteredData: [String]!
+    var data = ["No stores yet available!"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -42,6 +57,29 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
         tableView.refreshControl = refreshControl
+        
+        searchBar.delegate = self
+        
+        let ref = Database.database().reference().child("Stores")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                let array = snapshot.children.allObjects
+                self.data.removeAll()
+                for obj in array {
+                    let snapshot:DataSnapshot = obj as! DataSnapshot
+                    if let childSnapshot = snapshot.value as? [String : AnyObject]
+                         {
+                        self.data.append(childSnapshot["Name"] as! String)
+                        
+                    }
+                }
+            }
+            self.filteredData = self.data
+            self.tableView.reloadData()
+        }
+        
+        filteredData = data
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
@@ -58,7 +96,7 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    static func setStoreTappedOnList(store: Int) {
+    static func setStoreTappedOnList(store: String) {
         storeTappedOnList = store
     }
     
@@ -66,8 +104,7 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let targetStoryboard = storyboard?.instantiateViewController(identifier: "StoreInfoPage")
         else { return }
         
-        let store = indexPath[1]
-        ShopListViewController.setStoreTappedOnList(store: store)
+        ShopListViewController.setStoreTappedOnList(store: filteredData[indexPath.row])
         //MapViewController.setMarkerTappedOnMap(marker: marker)
         //MapViewController.setTappedFrom(1)
 
@@ -76,7 +113,19 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            // When there is no text, filteredData is the same as the original data
+            // When user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+            tableView.reloadData()
+        }
     
 
 }

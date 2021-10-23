@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class StoreInfoViewController: UIViewController {
     
@@ -15,17 +16,32 @@ class StoreInfoViewController: UIViewController {
     @IBOutlet weak var storeTagsLabel: UILabel!
     @IBOutlet weak var storeDescriptionTextView: UITextView!
     @IBOutlet weak var websiteButton: UIButton!
+    var link = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let ref = Database.database().reference().child("Stores").child("\(ShopListViewController.storeTappedOnList)")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    self.storeNameLabel.text = (childSnapshot["Name"] as! String)
+                    self.storeLocationLabel.text = (childSnapshot["Location"] as! String)
+                    self.link = childSnapshot["Link"] as! String
+                    self.storeTagsLabel.text = (childSnapshot["Industry"] as! String)
+                }
+            }
+        }
 
         // Do any additional setup after loading the view.
-        storeNameLabel.text = "Store Name \(ShopListViewController.storeTappedOnList + 1)"
+        storeNameLabel.text = "\(ShopListViewController.storeTappedOnList)"
     }
     
     @IBAction func websiteButtonPressed() {
-        if UIApplication.shared.canOpenURL(NSURL(string: "https://www.linkedin.com/in/poojan-raval-221243197/")! as URL) {
-            UIApplication.shared.open(NSURL(string: "https://www.linkedin.com/in/poojan-raval-221243197/")! as URL)
+        if UIApplication.shared.canOpenURL(NSURL(string: link)! as URL) {
+            UIApplication.shared.open(NSURL(string: link)! as URL)
         }
     }
     
