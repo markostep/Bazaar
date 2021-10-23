@@ -57,6 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let ref = Database.database().reference()
             ref.child("Users").child("\( Auth.auth().currentUser?.uid ?? "No userid value!")" ).child("Name").setValue("\( Auth.auth().currentUser?.displayName ?? "No name!")" )
             ref.child("Users").child("\( Auth.auth().currentUser?.uid ?? "No userid value!")" ).child("Email").setValue("\(Auth.auth().currentUser?.email ?? "No name!")" )
+            ref.child("Users").child("\( Auth.auth().currentUser?.uid ?? "No userid value!")" ).child("Area").setValue("Atlanta, GA")
         }
         }
     }
