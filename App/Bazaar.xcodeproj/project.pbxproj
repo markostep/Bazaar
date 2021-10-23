@@ -26,15 +26,14 @@
 		671F381A2723DE9600722386 /* ShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F38192723DE9600722386 /* ShopListViewController.swift */; };
 		671F381C2723DED000722386 /* ShopListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F381B2723DED000722386 /* ShopListTableViewCell.swift */; };
 		671F381E2723F07300722386 /* StoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F381D2723F07300722386 /* StoreInfoViewController.swift */; };
-
-		8E72C1D327246FE20040119C /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C1D227246FE10040119C /* FriendsViewController.swift */; };
-		8E72C209272470340040119C /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C208272470340040119C /* FriendsTableViewCell.swift */; };
-		8E72C20B27247ACE0040119C /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C20A27247ACE0040119C /* AddFriendViewController.swift */; };
-
 		671F385527246A0300722386 /* PurchaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F385427246A0300722386 /* PurchaseListViewController.swift */; };
 		671F385727246A1200722386 /* PurchaseListTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F385627246A1200722386 /* PurchaseListTableVIewCell.swift */; };
 		671F385927246C1500722386 /* ItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F385827246C1500722386 /* ItemInfoViewController.swift */; };
-
+		671F385C2724A54100722386 /* BadgesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F385B2724A54100722386 /* BadgesCollectionViewController.swift */; };
+		671F38922724A54E00722386 /* BadgesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F38912724A54E00722386 /* BadgesCollectionViewCell.swift */; };
+		8E72C1D327246FE20040119C /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C1D227246FE10040119C /* FriendsViewController.swift */; };
+		8E72C209272470340040119C /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C208272470340040119C /* FriendsTableViewCell.swift */; };
+		8E72C20B27247ACE0040119C /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72C20A27247ACE0040119C /* AddFriendViewController.swift */; };
 		8EBFF9BD2723F0D8009E51DD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBFF9BC2723F0D8009E51DD /* ProfileViewController.swift */; };
 		C10AE64E6CDD3BD1ECC9E58D /* Pods_Bazaar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F02D618ACB05C22281BF574 /* Pods_Bazaar.framework */; };
 /* End PBXBuildFile section */
@@ -422,14 +421,14 @@
 		671F38192723DE9600722386 /* ShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewController.swift; sourceTree = "<group>"; };
 		671F381B2723DED000722386 /* ShopListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListTableViewCell.swift; sourceTree = "<group>"; };
 		671F381D2723F07300722386 /* StoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreInfoViewController.swift; sourceTree = "<group>"; };
-
-		8E72C1D227246FE10040119C /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
-		8E72C208272470340040119C /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
-		8E72C20A27247ACE0040119C /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
-
 		671F385427246A0300722386 /* PurchaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListViewController.swift; sourceTree = "<group>"; };
 		671F385627246A1200722386 /* PurchaseListTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListTableVIewCell.swift; sourceTree = "<group>"; };
 		671F385827246C1500722386 /* ItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfoViewController.swift; sourceTree = "<group>"; };
+		671F385B2724A54100722386 /* BadgesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesCollectionViewController.swift; sourceTree = "<group>"; };
+		671F38912724A54E00722386 /* BadgesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E72C1D227246FE10040119C /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		8E72C208272470340040119C /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		8E72C20A27247ACE0040119C /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		8EBFF9BC2723F0D8009E51DD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B7DCADF2352DE083F6380488 /* Pods-BazaarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BazaarTests.debug.xcconfig"; path = "Target Support Files/Pods-BazaarTests/Pods-BazaarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E21B44C1A46EECA6DD27979D /* Pods-Bazaar-BazaarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bazaar-BazaarUITests.release.xcconfig"; path = "Target Support Files/Pods-Bazaar-BazaarUITests/Pods-Bazaar-BazaarUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -505,15 +504,14 @@
 				671F38192723DE9600722386 /* ShopListViewController.swift */,
 				671F381B2723DED000722386 /* ShopListTableViewCell.swift */,
 				671F381D2723F07300722386 /* StoreInfoViewController.swift */,
-
 				8E72C1D227246FE10040119C /* FriendsViewController.swift */,
 				8E72C208272470340040119C /* FriendsTableViewCell.swift */,
 				8E72C20A27247ACE0040119C /* AddFriendViewController.swift */,
-
 				671F385427246A0300722386 /* PurchaseListViewController.swift */,
 				671F385627246A1200722386 /* PurchaseListTableVIewCell.swift */,
 				671F385827246C1500722386 /* ItemInfoViewController.swift */,
-
+				671F385B2724A54100722386 /* BadgesCollectionViewController.swift */,
+				671F38912724A54E00722386 /* BadgesCollectionViewCell.swift */,
 			);
 			path = Bazaar;
 			sourceTree = "<group>";
@@ -1285,18 +1283,17 @@
 				671F3748272396AA00722386 /* ViewController.swift in Sources */,
 				671F3744272396AA00722386 /* AppDelegate.swift in Sources */,
 				671F385527246A0300722386 /* PurchaseListViewController.swift in Sources */,
+				671F38922724A54E00722386 /* BadgesCollectionViewCell.swift in Sources */,
 				671F37782723C99F00722386 /* SettingsTableViewCell.swift in Sources */,
 				671F37742723A8E100722386 /* SocialFeedTableViewCell.swift in Sources */,
-
 				8E72C209272470340040119C /* FriendsTableViewCell.swift in Sources */,
 				8E72C1D327246FE20040119C /* FriendsViewController.swift in Sources */,
-
 				671F385727246A1200722386 /* PurchaseListTableVIewCell.swift in Sources */,
-
 				671F381A2723DE9600722386 /* ShopListViewController.swift in Sources */,
 				671F37762723C95A00722386 /* SettingsViewController.swift in Sources */,
 				8E72C20B27247ACE0040119C /* AddFriendViewController.swift in Sources */,
 				671F381E2723F07300722386 /* StoreInfoViewController.swift in Sources */,
+				671F385C2724A54100722386 /* BadgesCollectionViewController.swift in Sources */,
 				671F385927246C1500722386 /* ItemInfoViewController.swift in Sources */,
 				671F3746272396AA00722386 /* SceneDelegate.swift in Sources */,
 				8EBFF9BD2723F0D8009E51DD /* ProfileViewController.swift in Sources */,
