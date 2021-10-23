@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>784885334016-4utoplmiqbu2909dl4tfdq27s0aj1scs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.784885334016-4utoplmiqbu2909dl4tfdq27s0aj1scs</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDhB7moxtkQ46kHM-q2YWt1BOUVfWaaEDc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>784885334016</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.markostep.Bazaar</string>
+	<key>PROJECT_ID</key>
+	<string>bazaar-96e54</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bazaar-96e54.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:784885334016:ios:40081c4dcec60ed54c98e5</string>
+	<key>DATABASE_URL</key>
+	<string>https://bazaar-96e54-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
