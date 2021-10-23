@@ -514,14 +514,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="poojywoojy" translatesAutoresizingMaskIntoConstraints="NO" id="exd-i4-yfw">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="exd-i4-yfw">
                                 <rect key="frame" x="0.0" y="0.0" width="227" height="211"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-de-6ol">
                                 <rect key="frame" x="235" y="9" width="193" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -624,8 +624,10 @@
                     <tabBarItem key="tabBarItem" title="" selectedImage="line.horizontal.3" catalog="system" id="Gjh-FC-eHC"/>
                     <navigationItem key="navigationItem" title="Profile" id="ueE-4I-CNc"/>
                     <connections>
+                        <outlet property="areaLabel" destination="4oz-V8-aaf" id="ZjI-xR-WMF"/>
                         <outlet property="emailLabel" destination="YO4-h3-ni3" id="ln8-eq-vJo"/>
                         <outlet property="nameLabel" destination="VD0-de-6ol" id="myW-hQ-sT5"/>
+                        <outlet property="profilePic" destination="exd-i4-yfw" id="b7F-na-ZR6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPh-BI-LtA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -905,7 +907,6 @@
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="network" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="poojywoojy" width="200" height="200"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>
         <image name="tshirt.fill" catalog="system" width="128" height="99"/>
         <systemColor name="labelColor">
