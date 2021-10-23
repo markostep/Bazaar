@@ -10,7 +10,7 @@ import FirebaseAuth
 import Firebase
 
 class ItemInfoViewController: UIViewController {
-    
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var itemPicView: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var storeNameLabel: UILabel!

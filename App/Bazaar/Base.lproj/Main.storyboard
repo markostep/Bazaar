@@ -128,7 +128,7 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bag.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-Gm-M1E">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-Gm-M1E">
                                 <rect key="frame" x="107" y="20" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -165,11 +165,24 @@
                                     <action selector="websiteButtonPressed" destination="FXg-yk-RYC" eventType="touchUpInside" id="a4Y-tk-sdb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgw-xg-tjh">
+                                <rect key="frame" x="125" y="615" width="179" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="QR Code"/>
+                                <connections>
+                                    <segue destination="GBG-SN-dRJ" kind="show" id="zdJ-2u-ZZq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zkt-GQ-NmU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Store Description" id="km4-H6-q3S"/>
+                    <navigationItem key="navigationItem" title="Store Description" id="km4-H6-q3S">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                     <connections>
                         <outlet property="storeDescriptionTextView" destination="MXL-Qp-Zyw" id="Cz5-yT-OLf"/>
                         <outlet property="storeLocationLabel" destination="OFB-yn-kEj" id="zBq-El-Ido"/>
@@ -908,6 +921,39 @@
             </objects>
             <point key="canvasLocation" x="2673.3644859813085" y="1286.8250539956805"/>
         </scene>
+        <!--Qr Code View Controller-->
+        <scene sceneID="Kbs-k5-2pj">
+            <objects>
+                <viewController id="GBG-SN-dRJ" customClass="qrCodeViewController" customModule="Bazaar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="823-hU-iUt">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZ5-6O-cZR">
+                                <rect key="frame" x="68" y="61" width="293" height="312"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" text="Scan your QR code when you shop to connect your purchases and earn points!" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GfA-lY-6lR">
+                                <rect key="frame" x="68" y="436" width="293" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7kc-uk-hNw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="j1x-eb-FfX"/>
+                    <connections>
+                        <outlet property="qrCodeImage" destination="lZ5-6O-cZR" id="i5K-UK-AOT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wis-PE-Ac8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3801.8691588785045" y="819.65442764578836"/>
+        </scene>
         <!--Friends-->
         <scene sceneID="qCx-iJ-CtW">
             <objects>
@@ -999,6 +1045,7 @@
             <point key="canvasLocation" x="3813" y="-546"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="106"/>
         <image name="bag.fill" catalog="system" width="128" height="128"/>
@@ -1028,6 +1075,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
