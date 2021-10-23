@@ -12,6 +12,8 @@ import FirebaseGoogleAuthUI
 import FirebaseEmailAuthUI
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
@@ -28,6 +30,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.likeButton.imageView?.tintColor = UIColor.systemGray
         cell.likeButton.setTitle(" Helpful • \(likedAmount)", for: .normal)
         cell.typeLabel.text = "Clothes OMG"
+        
+        let image = UIImage(named: "poojywoojy.jpeg")
+        let ratio = (image?.size.width)! / (image?.size.height)!
+        let newHeight = cell.mediaView.frame.width / ratio
+        //let width = image?.size.width
+        //let height = image?.size.height
+        //mediaCell.mediaView.clipsToBounds = true
+        //mediaCell.mediaView.contentMode = .center
+        //mediaCell.mediaView.contentMode = .scaleAspectFit
+        //mediaCell.mediaView.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
+        cell.heightConstraint.constant = newHeight
+        cell.mediaView.layoutIfNeeded()
+        
+        cell.mediaView.image = image
         
         return cell
         
@@ -86,6 +102,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }*/
         }
     }
+    
+    
+    
+    
 
     
     

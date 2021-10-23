@@ -16,6 +16,8 @@ class SocialFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var mediaView: UIImageView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     //@IBOutlet weak var circleImage: UIImageView!
 
     var likedState = false
