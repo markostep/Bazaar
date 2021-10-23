@@ -18,6 +18,7 @@
 		671F375B272396AD00722386 /* BazaarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F375A272396AD00722386 /* BazaarTests.swift */; };
 		671F3765272396AD00722386 /* BazaarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F3764272396AD00722386 /* BazaarUITests.swift */; };
 		671F3767272396AD00722386 /* BazaarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F3766272396AD00722386 /* BazaarUITestsLaunchTests.swift */; };
+		671F37742723A8E100722386 /* SocialFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671F37732723A8E100722386 /* SocialFeedTableViewCell.swift */; };
 		C10AE64E6CDD3BD1ECC9E58D /* Pods_Bazaar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F02D618ACB05C22281BF574 /* Pods_Bazaar.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		671F3760272396AD00722386 /* BazaarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BazaarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		671F3764272396AD00722386 /* BazaarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazaarUITests.swift; sourceTree = "<group>"; };
 		671F3766272396AD00722386 /* BazaarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazaarUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		671F37732723A8E100722386 /* SocialFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialFeedTableViewCell.swift; sourceTree = "<group>"; };
 		B7DCADF2352DE083F6380488 /* Pods-BazaarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BazaarTests.debug.xcconfig"; path = "Target Support Files/Pods-BazaarTests/Pods-BazaarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E21B44C1A46EECA6DD27979D /* Pods-Bazaar-BazaarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bazaar-BazaarUITests.release.xcconfig"; path = "Target Support Files/Pods-Bazaar-BazaarUITests/Pods-Bazaar-BazaarUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 				671F3743272396AA00722386 /* AppDelegate.swift */,
 				671F3745272396AA00722386 /* SceneDelegate.swift */,
 				671F3747272396AA00722386 /* ViewController.swift */,
+				671F37732723A8E100722386 /* SocialFeedTableViewCell.swift */,
 				671F3749272396AA00722386 /* Main.storyboard */,
 				671F374C272396AC00722386 /* Assets.xcassets */,
 				671F374E272396AC00722386 /* LaunchScreen.storyboard */,
@@ -164,7 +167,6 @@
 				B7DCADF2352DE083F6380488 /* Pods-BazaarTests.debug.xcconfig */,
 				655E68B62C1C43DFAAA75A2E /* Pods-BazaarTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -445,6 +447,7 @@
 			files = (
 				671F3748272396AA00722386 /* ViewController.swift in Sources */,
 				671F3744272396AA00722386 /* AppDelegate.swift in Sources */,
+				671F37742723A8E100722386 /* SocialFeedTableViewCell.swift in Sources */,
 				671F3746272396AA00722386 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,6 +628,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KMRBWSMJD4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bazaar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -653,6 +657,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KMRBWSMJD4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bazaar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
