@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid )")
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -27,9 +28,9 @@ class ProfileViewController: UIViewController {
             if(snapshot.exists()) {
                 if let childSnapshot = snapshot.value as? [String : AnyObject]
                      {
-                    let name = childSnapshot["Name"] as! String
-                    let email = childSnapshot["Email"] as! String
-                    let area = childSnapshot["Area"] as! String
+                    let name = "\(childSnapshot["Name"] as! String)"
+                    let email = "\(childSnapshot["Email"] as! String)"
+                    let area = "📍\(childSnapshot["Area"] as! String)"
                     self.emailLabel.text = email
                     self.nameLabel.text = name
                     self.areaLabel.text = area
@@ -52,6 +53,16 @@ class ProfileViewController: UIViewController {
           }
         }
     }
+    
+    @IBOutlet weak var logOutButton: UIButton!
+    
+    @IBAction func logoutButtonPressed() {
+        do {
+          try Auth.auth().signOut()
+        } catch let err {
+          print(err)
+        }
+      }
     
 
 }
