@@ -127,28 +127,27 @@ def parse_order(order):
 
 
 if __name__ == '__main__':
-    test_dict = {
-        'comments': 'IKEA order: Bed sheets, Teddy bear',
-        'customer': {'id': 'Vm6gfWN9R4WrRHRJRswfGewkirx1'},
-        'orderLines': [
-            {
-                'description': 'Neon Bed sheets with Silk linen tops and Tao\'s comforter mattress',
-                'itemType': 'House',
-                'productId': {'value': 'Neon bed sheets'},
-                'quantity': {'value': 2},
-                'unitPrice': 50.325
-            },
-            {
-                'description': 'Dragon Stuffed Animal',
-                'itemType': 'Kids',
-                'productId': {'value': 'Dragon Stuffed Animal 5ft x 2ft'},
-                'quantity': {'value': 1},
-                'unitPrice': 39.50
-            }
-        ],
-        'owner': 'IKEA',
-        'payments': [{'amount': 43.50,}],
-    }
-
+    # test_dict = {
+    #     'comments': 'IKEA order: Bed sheets, Teddy bear',
+    #     'customer': {'id': 'Vm6gfWN9R4WrRHRJRswfGewkirx1'},
+    #     'orderLines': [
+    #         {
+    #             'description': 'Neon Bed sheets with Silk linen tops and Tao\'s comforter mattress',
+    #             'itemType': 'House',
+    #             'productId': {'value': 'Neon bed sheets'},
+    #             'quantity': {'value': 2},
+    #             'unitPrice': 50.325
+    #         },
+    #         {
+    #             'description': 'Dragon Stuffed Animal',
+    #             'itemType': 'Kids',
+    #             'productId': {'value': 'Dragon Stuffed Animal 5ft x 2ft'},
+    #             'quantity': {'value': 1},
+    #             'unitPrice': 39.50
+    #         }
+    #     ],
+    #     'owner': 'IKEA',
+    #     'payments': [{'amount': 43.50,}],
+    # }
 
     print(api_order('10178637205797718132', 'GET'))
