@@ -1,0 +1,46 @@
+{
+    "comments": "Twinscape Enterprise Products: One stop shop for all clothing needs",
+    "orderLines": [
+        {
+            "description": "Hand woven tracksuit with ground beads and spider silk",
+            "itemType": "Clothes",
+            "productId": {"value'": "Spidy Tracksuit"},
+            "quantity": {"value'": 2},
+            "unitPrice": 12,
+            "modifierCode": "E"
+        },
+        {
+            "description": "Maasai Hand bracelets made of beads and ivory",
+            "itemType": "Clothes",
+            "productId": {"value": "Kenyan Bracelet 7.25 Inches"},
+            "quantity": {"value": 7},
+            "unitPrice": 6.30,
+            "modifierCode": "E"
+        },
+        {
+            "description": "Environmental Motivation T-shirt that highlights important themes that meet UN sustainability goals",
+            "itemType": "Clothes",
+            "productId": {"value": "Environmental T-shirt size-M"},
+            "quantity": {"value": 1},
+            "unitPrice": 11,
+            "modifierCode": "E"
+        },
+        {
+            "description": "Stiched Shirt maybe of 30% polyester and 70% cotton",
+            "itemType": "Clothes",
+            "productId": {"value": "Buttoned shirt size-L"},
+            "quantity": {"value": 5},
+            "unitPrice": 14,
+            "modifierCode": ""
+        },
+        {
+            "description": "Ripped Jeans with faded blue and white colors",
+            "itemType": "Clothes",
+            "productId": {"value": "Ripped Jeans size-waist 28"},
+            "quantity": {"value": 2},
+            "unitPrice": 8,
+            "modifierCode": ""
+        }
+    ],
+    "owner": "Twinscape Enterprises"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "trailinformation",
+  "version": "1.0.0",
+  "description": "json files for POS system",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "author": "Ankit",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.1"
+  }
+}
