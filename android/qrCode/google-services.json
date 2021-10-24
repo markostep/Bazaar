@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "784885334016",
+    "firebase_url": "https://bazaar-96e54-default-rtdb.firebaseio.com",
+    "project_id": "bazaar-96e54",
+    "storage_bucket": "bazaar-96e54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784885334016:android:5ee5bc20bf1836174c98e5",
+        "android_client_info": {
+          "package_name": "com.example.qrcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784885334016-g05k89ql7q9c0k328rhpgkhskcf6q8a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF82kT8OpzWeHiV4P3AiYMxzZtsLq14-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784885334016-g05k89ql7q9c0k328rhpgkhskcf6q8a6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "784885334016-4utoplmiqbu2909dl4tfdq27s0aj1scs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.markostep.Bazaar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
