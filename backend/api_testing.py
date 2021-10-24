@@ -113,7 +113,9 @@ def parse_order(order):
             'env_friendly': 'E' in product['modifierCode'],
             'score': product['priceModifiers'][0]['amount'],
             'attributes': product['priceModifiers'][0]['description'],
-            'points': product['extendedAmount']
+            'points': product['extendedAmount'],
+            'posted': False,
+            'doubled': False
         }
 
         for k,v in orderInfo.items():

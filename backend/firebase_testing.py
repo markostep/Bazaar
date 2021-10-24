@@ -2,7 +2,7 @@ from firebase_admin import credentials, initialize_app, db
 from warnings import warn
 import api_testing as api
 from inspect import currentframe, getouterframes
-from datetime import datetime
+from datetime import datetime, timedelta
 import math
 
 
@@ -12,6 +12,8 @@ default_app = initialize_app(cred, {'databaseURL': 'https://bazaar-96e54-default
 head = db.reference('/')
 stores = db.reference('/Stores/')
 users = db.reference('/Users/')
+posts = db.reference('/Posts/')
+full_bar = 1000
 
 # the fields that must be in every store
 store_fields = {'Classification', 'Industry', 'Location', 'Name', 'Image', 'Link'}
@@ -110,10 +112,14 @@ def api_order(input, method, debug=False):
 
         allStores = get(stores)
         points = 1
+        num_env, num_clothes = 0,0
 
-        attrs = (allStores[input['owner']]['Classification'] if input['owner'] in allStores else 0)
+        attrs = (allStores[input['owner']]['Classification'] if input['owner'] in allStores else '')
 
         for prod in input['orderLines']:
+            if 'E' in prod['modifierCode']: num_env += 1
+            if prod['itemType'] == 'Clothes': num_clothes += 1
+
             prod_attrs = attrs + prod['modifierCode']
             score = len(prod_attrs)
             prod_points = prod['unitPrice']*math.log(score + 1)
@@ -128,18 +134,63 @@ def api_order(input, method, debug=False):
         user = get(users)[userId]
         if 'Points' in user: points += user['Points']
 
-        update(userId, {'Points': points}, users)
-        update_badges(userId)
 
+        points += check_posted(userId)
+        update(userId, {'Points': points}, users)
+        update_badges(userId, num_env, num_clothes)
+        reorder_posts()
 
     return api.api_order(input, method)
 
-def update_badges(userId):
+
+def update_badges(userId, num_env, num_clothes):
     '''
     Updates the user's progress towards each of the badges
     '''
     user = get(users)[userId]
-    # allStores[input['owner']]['Classification'] if input['owner']
+    points = user['Points']
+
+    if 'Badges' in user:
+        num_clothes += user['Badges']['clothes_collector']['num_clothes_purchases']
+        num_env += user['Badges']['planet_saver']['num_env_purchases']
+
+    update('Badges', {
+                'tree_hugger': {'achieved': num_env >= 1},
+                'stronger_together': {'achieved': points >= full_bar},
+                'planet_saver': {'achieved': num_env >= 5, 'num_env_purchases': num_env},
+                'clothes_collector': {'achieved': num_clothes >= 10, 'num_clothes_purchases': num_clothes},
+                'best_friends': {'achieved': len(user['Friends'] if 'Friends' in user else []) >= 5},
+                'going_bazaar': {'achieved': points >= full_bar*10}
+            }, db.reference(f'/Users/{userId}/'))
+
+def check_posted(userId):
+    '''
+    Returns bonus points for when users post about their purchases
+    '''
+    user = get(users)[userId]
+    bonus = 0
+
+    if 'Purchases' in user:
+        for purchase_id,purchase in user['Purchases'].items():
+            if purchase['posted'] and not purchase['doubled']:
+                bonus += purchase['points']
+                update(purchase_id, {'doubled': True}, db.reference(f'/Users/{userId}/Purchases/'))
+
+    return bonus
+
+def reorder_posts():
+    '''
+    Updates the order of the posts in the database
+    '''
+    allPosts = get(db.reference('/Posts/'))
+    for postId,info in allPosts.items():
+        update(postId,
+               {'postRanking': 1 / (info['likes']/5 + \
+                               max(10 - (datetime.now() - datetime.strptime(info['time'], '%Y/%m/%d %H:%M:%S'))/timedelta(days=1), 0) + \
+                               info['score']*2.5)
+                }, posts)
+
+
 
 
 # data = {
@@ -179,19 +230,19 @@ test_dict = {
     'comments': 'APEX Museum: Bed sheets, Stuffed Animal',
     'orderLines': [
         {
-            'description': 'Magenta Bed sheets with Silk linen tops and Tao\'s comforter mattress',
+            'description': 'Rainbow Bed sheets with Silk linen tops and Tao\'s comforter mattress',
             'itemType': 'House',
-            'productId': {'value': 'Magenta bed sheets'},
+            'productId': {'value': 'Rainbow bed sheets'},
             'quantity': {'value': 2},
-            'unitPrice': 5.3,
+            'unitPrice': 0,
             'modifierCode': 'E'
         },
         {
-            'description': 'Fox Stuffed Animal',
+            'description': 'Bat Stuffed Animal',
             'itemType': 'Kids',
-            'productId': {'value': 'Fox Stuffed Animal 5ft x 2ft'},
+            'productId': {'value': 'Bat Stuffed Animal 5ft x 2ft'},
             'quantity': {'value': 1},
-            'unitPrice': 3.5,
+            'unitPrice': 0,
             'modifierCode': ''
         }
     ],
@@ -204,10 +255,16 @@ if debug: test_dict['customer'] = {'id': '0kKmboE80YhrRUS5YCb3J4OjD802'}
 
 # print(api_order(test_dict, 'POST'))
 # print(api_order('13139740844105295507', 'GET')['comments'])
-add_order(api_order(test_dict, 'POST', debug=debug))
+# add_order(api_order(test_dict, 'POST', debug=debug))
 # api.parse_order(api_order('12145144029130432348', 'GET'))
+# update_badges('0kKmboE80YhrRUS5YCb3J4OjD802', 1, 5)
+
+# print(type(get(users)['0kKmboE80YhrRUS5YCb3J4OjD802']['Purchases']['764395a1c1dc4b51855610dd615b32cd']['posted']))
+# print(check_posted('0kKmboE80YhrRUS5YCb3J4OjD802'))
+
+# reorder_posts()
+# print(get(posts, 'postRanking').keys())
 
 
 
-# when adding purchases, automatically check db for that retailer to add the classification
 
