@@ -59,6 +59,13 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
         tableView.refreshControl = refreshControl
+        
+        refresh()
+        
+        filteredData = data
+    }
+    
+    func refresh() {
         let ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid )").child("Purchases")
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard snapshot.exists() else { return }
@@ -77,12 +84,10 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
             self.filteredData = self.data
             self.tableView.reloadData()
         }
-        
-        filteredData = data
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
-        DispatchQueue.global().async {
+        /*DispatchQueue.global().async {
             refreshControl.endRefreshing()
             /*MarkerManager.shared.refreshMarkers {
                 refreshControl.endRefreshing()
@@ -92,7 +97,9 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
                 self.tableView.reloadData()
                 NotificationCenter.default.post(name: MapViewController.reloadMapNotification, object: nil)
             }*/
-        }
+        }*/
+        refreshControl.endRefreshing()
+        self.refresh()
     }
     
     static func setStoreTappedOnList(store: String) {

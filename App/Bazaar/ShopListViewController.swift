@@ -60,6 +60,12 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         searchBar.delegate = self
         
+        refresh()
+        
+        filteredData = data
+    }
+    
+    func refresh() {
         let ref = Database.database().reference().child("Stores")
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard snapshot.exists() else { return }
@@ -78,13 +84,13 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
             self.filteredData = self.data
             self.tableView.reloadData()
         }
-        
-        filteredData = data
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
-        DispatchQueue.global().async {
-            refreshControl.endRefreshing()
+        self.refresh()
+        refreshControl.endRefreshing()
+        //DispatchQueue.global().async {
+          //  refreshControl.endRefreshing()
             /*MarkerManager.shared.refreshMarkers {
                 refreshControl.endRefreshing()
                 self.markers = MarkerManager.shared.markers
@@ -93,7 +99,7 @@ class ShopListViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableView.reloadData()
                 NotificationCenter.default.post(name: MapViewController.reloadMapNotification, object: nil)
             }*/
-        }
+        //}
     }
     
     static func setStoreTappedOnList(store: String) {

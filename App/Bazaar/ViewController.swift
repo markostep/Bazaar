@@ -96,7 +96,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             ref.child("Users").child("\( Auth.auth().currentUser?.uid ?? "No userid value!")" ).child("Area").setValue("Atlanta, GA")
         }
         }
-        refresh()
     }
     
     func showLoginVC() {
