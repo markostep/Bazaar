@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,7 +31,45 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.likeButton.setTitle(" Helpful • \(likedAmount)", for: .normal)
         cell.typeLabel.text = "Clothes OMG"
         
-        let image = UIImage(named: "poojywoojy.jpeg")
+        var image: UIImage!
+        var imageSet = false
+        
+        let ref = Database.database().reference().child("Posts").child("\(filteredData[indexPath.row])")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    cell.typeLabel.text = (childSnapshot["itemName"] as! String)
+                    cell.distLabel.text = (childSnapshot["description"] as! String)
+                    cell.descriptionTextView.text = (childSnapshot["caption"] as! String)
+                    cell.likedAmount = (childSnapshot["likes"] as! Int)
+                    cell.timeLabel.text = (childSnapshot["retailer"] as! String)
+                    
+                    let imgPath = (childSnapshot["image"] as! String)
+                    let storage = Storage.storage()
+                    let pathReference = storage.reference(withPath: imgPath)
+                    print(pathReference)
+                    
+                    pathReference.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                      if let error = error {
+                        // Uh-oh, an error occurred!
+                          print("error occured image")
+                      } else {
+                        // Data for "images/island.jpg" is returned
+
+                          cell.mediaView.image = UIImage(data: data!)
+                          image = cell.mediaView.image
+                          imageSet = true
+                      }
+                    }
+                }
+            }
+        }
+        if (!imageSet) {
+            image = UIImage(named: "pickapicture")
+        }
+        
         let ratio = (image?.size.width)! / (image?.size.height)!
         let newHeight = cell.mediaView.frame.width / ratio
         //let width = image?.size.width
@@ -42,8 +80,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //mediaCell.mediaView.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
         cell.heightConstraint.constant = newHeight
         cell.mediaView.layoutIfNeeded()
-        
-        cell.mediaView.image = image
         
         return cell
         
@@ -64,12 +100,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func showLoginVC() {
         let authUI = FUIAuth.defaultAuthUI()
-        let providers: [FUIAuthProvider] = [FUIEmailAuth(), FUIGoogleAuth()]
+        let providers: [FUIAuthProvider] = [FUIEmailAuth()]
         authUI?.providers = providers
         let authViewController = authUI!.authViewController()
         authViewController.modalPresentationStyle = .fullScreen
-        authViewController.navigationBar.tintColor = UIColor.white
-        authViewController.navigationBar.barTintColor = UIColor.init(red: 254/255, green: 70/255, blue: 70/255, alpha: 1)
+        /*authViewController.navigationBar.scrollEdgeAppearance?.backgroundColor = UIColor.systemBlue
+        authViewController.navigationBar.standardAppearance.backgroundColor = UIColor.systemBlue
+        authViewController.navigationBar.tintColor = UIColor.systemBlue
+        authViewController.navigationBar.barTintColor = UIColor.systemBlue*/
         self.present(authViewController, animated: true, completion: nil)
     }
     
@@ -89,10 +127,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         
         tableView.refreshControl = refreshControl
+        
+        refresh()
+        
+        filteredData = data
+    }
+    
+    var filteredData: [String]!
+    var data = ["No stores yet available!"]
+    
+    func refresh() {
+        let ref = Database.database().reference().child("Posts")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                let array = snapshot.children.allObjects
+                self.data.removeAll()
+                for obj in array {
+                    let snapshot:DataSnapshot = obj as! DataSnapshot
+                    if let childSnapshot = snapshot.value as? [String : AnyObject]
+                         {
+                        self.data.append(childSnapshot["itemID"] as! String)
+                        
+                    }
+                }
+            }
+            self.filteredData = self.data
+            self.tableView.reloadData()
+        }
     }
 
     @objc func refresh(_ refreshControl: UIRefreshControl) {
-        DispatchQueue.global().async {
+        //DispatchQueue.global().async {
+            self.refresh()
             refreshControl.endRefreshing()
             /*MarkerManager.shared.refreshMarkers {
                 refreshControl.endRefreshing()
@@ -102,7 +169,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.tableView.reloadData()
                 NotificationCenter.default.post(name: MapViewController.reloadMapNotification, object: nil)
             }*/
-        }
+        //}
     }
     
     
