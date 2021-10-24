@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/nextButton"
+        android:text="Back To Store"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:text="Hello World!" />
+
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:autoFocusButtonColor="@android:color/white"
+        app:autoFocusButtonVisible="false"
+        app:flashButtonColor="@android:color/white"
+        app:frameAspectRatioHeight="1"
+        app:frameAspectRatioWidth="1"
+        app:frameColor="@color/teal_700"
+        app:frameCornersRadius="5dp"
+        app:frameCornersSize="50dp"
+        app:frameSize="0.75"
+
+        app:frameThickness="2dp"
+        app:maskColor="#77000000" >
+
+    </com.budiyev.android.codescanner.CodeScannerView>
+
+</FrameLayout>

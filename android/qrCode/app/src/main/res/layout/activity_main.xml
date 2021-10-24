@@ -1,30 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="117dp"
-        android:text="Hello World!" />
+        android:layout_height="50dp"
+        android:background="#5D3793"
+        android:text="Catalog"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="@color/white"/>
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardA"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="false"
-        app:flashButtonColor="@android:color/white"
-        app:frameAspectRatioHeight="1"
-        app:frameAspectRatioWidth="1"
-        app:frameColor="@color/teal_700"
-        app:frameCornersRadius="5dp"
-        app:frameCornersSize="50dp"
-        app:frameSize="0.75"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
 
-        app:frameThickness="2dp"
-        app:maskColor="#77000000" />
-</FrameLayout>
+        app:cardElevation="2dp"
+
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <!--
+        In the above cardview widget
+        cardelevation property will give elevation to your card view
+        card corner radius will provide radius to your card view
+        card background color will give background color to your card view
+        card max elevation will give the cardview maximum elevation
+        card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
+        card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
+        below are the two widgets imageview and text view we are displaying inside our card view.
+        -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="350dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/num1"/>
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/shirt"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/item1Name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:text="Navy Polo T-Shirt"
+            android:textSize="18sp"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item1Disc"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="40dp"
+            android:text="A Classic best Seller Guarenteed to Impress"
+            android:textColor="@android:color/background_dark"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardB"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+
+        app:cardElevation="2dp"
+
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="350dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/num2"/>
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="0dp"
+            android:layout_margin="1dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/slide_23"
+            />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/item2Name"
+            android:layout_marginLeft="135dp"
+            android:textColor="@android:color/background_dark"
+            android:text="Classic Denim"
+            android:textSize="18sp"
+            android:textStyle="bold"
+/>
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:id="@+id/item2Disc"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/background_dark"
+            android:text="A Classic best Seller Guarenteed to Impress"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardC"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <!--
+        In the above cardview widget
+        cardelevation property will give elevation to your card view
+        card corner radius will provide radius to your card view
+        card background color will give background color to your card view
+        card max elevation will give the cardview maximum elevation
+        card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
+        card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
+        below are the two widgets imageview and text view we are displaying inside our card view.
+        -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="350dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/num3"/>
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/tote"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/item3Name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:text="Homemade Tote Bag"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item3Disc"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/background_dark"
+            android:text="All you need to complete your look"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardD"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <!--
+        In the above cardview widget
+        cardelevation property will give elevation to your card view
+        card corner radius will provide radius to your card view
+        card background color will give background color to your card view
+        card max elevation will give the cardview maximum elevation
+        card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
+        card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
+        below are the two widgets imageview and text view we are displaying inside our card view.
+        -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="350dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/num4"/>
+        <ImageView
+            android:id="@+id/img4"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/hawaii"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/item4Name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:text="Oversized Hoodie"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item4Disc"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/background_dark"
+            android:text="A Classic best Seller Guarenteed to Impress"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardE"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="530dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="350dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/num5"/>
+        <!--
+        In the above cardview widget
+        cardelevation property will give elevation to your card view
+        card corner radius will provide radius to your card view
+        card background color will give background color to your card view
+        card max elevation will give the cardview maximum elevation
+        card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
+        card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
+        below are the two widgets imageview and text view we are displaying inside our card view.
+        -->
+
+        <ImageView
+            android:id="@+id/img5"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/hat"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/item5Name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:text="Dad Hat"
+            android:textSize="18sp"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item5Disc"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@android:color/background_dark"
+            android:text="A Classic best Seller Guarenteed to Impress"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/comments"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:textSize="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_marginBottom="15dp"
+        android:text="Leave Comments Here"
+        android:shadowColor="@color/black"
+        android:textColor="@color/black"
+        />
+
+    <Button
+        android:id="@+id/checkout"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="25dp"
+        android:textSize="11dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginBottom="15dp"
+        android:text="Checkout"
+        android:textColor="@color/white" />
+</RelativeLayout>
