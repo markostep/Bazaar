@@ -1,12 +1,6 @@
-//
-//  SettingsTableViewCell.swift
-//  Bazaar
-//
-//  Created by Marko Stepniczka on 10/23/21.
-//
 
 import UIKit
-
+import FirebaseAuth
 class FriendsTableViewCell: UITableViewCell {
     
     static let identifier = "FriendsTableViewCell"
@@ -20,20 +14,29 @@ class FriendsTableViewCell: UITableViewCell {
     @IBOutlet var accept: UIButton!
     @IBOutlet var decline: UIButton!
     
-    @IBAction func tappedAccept() {
-        name.text = "changed"
-        print("tapped")
-    }
-    @IBAction func tappedDecline() {
-        print("tapped")
+        
+    @IBAction func acceptButtonPressed() {
+        updateFriends(accepted: true)
     }
     
+    @IBAction func declineButtonPressed() {
+        updateFriends(accepted: false)
+    }
     
     
-    func configure(with title: String) {
+
+}
+private extension FriendsTableViewCell {
+    func updateFriends(accepted: Bool) {
+        if accepted {
+            print("True")
+            self.accept.isHidden = true
+            self.decline.isHidden = true
+        } else {
+            print("False")
+            self.accept.isHidden = true
+            self.decline.isHidden = true
+        }
         
     }
-
-
-
 }
