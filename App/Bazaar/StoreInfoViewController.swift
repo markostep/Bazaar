@@ -22,6 +22,10 @@ class StoreInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
+        
         var name = ""
         let ref = Database.database().reference().child("Stores").child("\(ShopListViewController.storeTappedOnList)")
         ref.observeSingleEvent(of: .value) { (snapshot) in

@@ -14,4 +14,5 @@ class BadgesCollectionViewCell: UICollectionViewCell {
     static let identifier = "BadgesCollectionViewCell"
     @IBOutlet weak var badgeImageView: UIImageView!
     @IBOutlet weak var badgeLabel: UILabel!
+    @IBOutlet weak var blurView: UIVisualEffectView!
 }

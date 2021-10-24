@@ -23,10 +23,16 @@ class ItemInfoViewController: UIViewController {
     static var storeItemName: String!
     static var storeItemDescription: String!
     static var storeRetailer: String!
+    static var storePoints: Float!
+    static var storeScore: Int!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
+        
         let storage = Storage.storage()
         let ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Purchases").child("\(PurchaseListViewController.storeTappedOnList)")
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -34,7 +40,7 @@ class ItemInfoViewController: UIViewController {
             if(snapshot.exists()) {
                 if let childSnapshot = snapshot.value as? [String : AnyObject]
                      {
-                    let pathReference = storage.reference(withPath: "images/324AFE96-A68F-4104-89D4-07BDD68E7125_4_5005_c.jpeg")
+                    let pathReference = storage.reference(withPath: "images/navyshirt.jpeg")
                     print(pathReference)
                     // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
                     pathReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
@@ -51,6 +57,10 @@ class ItemInfoViewController: UIViewController {
                     ItemInfoViewController.setStoreRetailer(store: "\(childSnapshot["retailer"] as! String)")
                     ItemInfoViewController.setStoreItemName(store: "\(childSnapshot["productName"] as! String)")
                     ItemInfoViewController.setStoreItemDescription(store: "\(childSnapshot["description"] as! String)")
+                    let points = (childSnapshot["points"] as! NSNumber)
+                    ItemInfoViewController.setStorePoints(store: points.floatValue)
+                    let score = (childSnapshot["score"] as! Int)
+                    ItemInfoViewController.setStoreScore(store: score)
                     self.priceLabel.text = "Price: $\(childSnapshot["price"] as! Double)"
                     self.itemNameLabel.text = "\(childSnapshot["productName"] as! String)"
                     self.quantityLabel.text = "Quantity: \(childSnapshot["quantity"] as! Int)"
@@ -74,6 +84,14 @@ class ItemInfoViewController: UIViewController {
     
     static func setStoreRetailer(store: String) {
         storeRetailer = store
+    }
+    
+    static func setStorePoints(store: Float) {
+        storePoints = store
+    }
+    
+    static func setStoreScore(store: Int) {
+        storeScore = store
     }
     
     

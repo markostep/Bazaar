@@ -10,9 +10,9 @@ import Firebase
 import FirebaseAuth
 
 class FriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+
     static var friendsTappedOnList = String()
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredData.count
@@ -73,6 +73,9 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
         
         self.tableView.showsVerticalScrollIndicator = false
         
@@ -136,20 +139,5 @@ class FriendsViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.pushViewController(targetStoryboard, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            // When there is no text, filteredData is the same as the original data
-            // When user has entered text into the search box
-            // Use the filter method to iterate over all items in the data array
-            // For each item, return true if the item should be included and false if the
-            // item should NOT be included
-            filteredData = searchText.isEmpty ? data : data.filter { (item: String) -> Bool in
-                // If dataItem matches the searchText, return true to include it
-                return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-            }
-            
-            tableView.reloadData()
-        }
-    
 
 }

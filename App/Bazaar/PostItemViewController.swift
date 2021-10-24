@@ -77,6 +77,12 @@ class PostItemViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func postButtonPressed() {
+        let currentDateTime = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let currentTimeStr = formatter.string(from: currentDateTime)
+        let rankScore: Double = (Double(ItemInfoViewController.storeScore) * 2.5) + 10.0
+        
         let ref = Database.database().reference().child("Posts").child("\(PurchaseListViewController.storeTappedOnList)")
         let postDictionary = ["description": ItemInfoViewController.storeItemDescription as Any,
                                 "itemName": ItemInfoViewController.storeItemName as Any,
@@ -84,9 +90,16 @@ class PostItemViewController: UIViewController, UIImagePickerControllerDelegate,
                                 "caption": commentTextView.text as Any,
                                 "image": "Posts/\(PurchaseListViewController.storeTappedOnList)",
                                 "likes": 0,
-                                "points": 24,
+                                "points": ItemInfoViewController.storePoints as Any,
+                                "score": ItemInfoViewController.storeScore as Any,
+                                "postRanking": rankScore as Any,
                                 "itemID": PurchaseListViewController.storeTappedOnList,
+                                "time": "\(currentTimeStr)" as Any,
                                 "userID": Auth.auth().currentUser!.uid] as [String : Any]
         ref.setValue(postDictionary)
+
+        let ref2 = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Purchases").child("\(PurchaseListViewController.storeTappedOnList)").child("posted")
+        ref2.setValue(true)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

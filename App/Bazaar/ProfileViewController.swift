@@ -17,6 +17,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var areaLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var progressBarLabel: UILabel!
+    @IBOutlet weak var redeemButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +34,39 @@ class ProfileViewController: UIViewController {
                     let name = "\(childSnapshot["Name"] as! String)"
                     let email = "\(childSnapshot["Email"] as! String)"
                     let area = "📍\(childSnapshot["Area"] as! String)"
+                    //let progress = (childSnapshot["Points"] as! NSNumber)
+                    //let progressFloat = progress.floatValue
                     self.emailLabel.text = email
                     self.nameLabel.text = name
                     self.areaLabel.text = area
+                    //self.progressBar.progress = progressFloat / 1000.0
+                    //self.progressBarLabel.text = "\(progressFloat)/1000 points"
+                    self.progressBar.transform = self.progressBar.transform.scaledBy(x: 1, y: 9)
+                    self.progressBar.layer.cornerRadius = 10
+                    self.progressBar.clipsToBounds = true
+                    self.progressBar.layer.sublayers![1].cornerRadius = 10
+                    self.progressBar.subviews[1].clipsToBounds = true
+                }
+            }
+        }
+        
+        ref.observe(.value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    let progress = (childSnapshot["Points"] as! NSNumber)
+                    let progressFloat = progress.floatValue
+                    self.progressBar.progress = progressFloat / 1000.0
+                    self.progressBarLabel.text = "\(progressFloat)/1000 points"
+                    
+                    if self.progressBar.progress >= 1 {
+                        self.progressBar.progressTintColor = UIColor.systemGreen
+                        self.redeemButton.alpha = 1
+                    } else {
+                        self.progressBar.progressTintColor = UIColor.systemBlue
+                        self.redeemButton.alpha = 0
+                    }
                 }
             }
         }
@@ -43,7 +76,7 @@ class ProfileViewController: UIViewController {
         let pathReference = storage.reference(withPath: "users/\(uid).jpg")
         print(pathReference)
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        pathReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        pathReference.getData(maxSize: 5 * 1024 * 1024) { data, error in
           if let error = error {
             // Uh-oh, an error occurred!
           } else {

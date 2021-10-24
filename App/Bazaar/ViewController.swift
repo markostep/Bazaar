@@ -24,12 +24,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.descriptionTextView.isEditable = false
         
-        let likedAmount = 0;
+        //let likedAmount = 0;
+        //let scoreAmount = 0;
         
         cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
         cell.likeButton.imageView?.tintColor = UIColor.systemGray
-        cell.likeButton.setTitle(" Helpful • \(likedAmount)", for: .normal)
-        cell.typeLabel.text = "Clothes OMG"
+        
+        
+        cell.postId = filteredData[indexPath.row]
+        
         
         var image: UIImage!
         var imageSet = false
@@ -44,7 +47,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     cell.distLabel.text = (childSnapshot["description"] as! String)
                     cell.descriptionTextView.text = (childSnapshot["caption"] as! String)
                     cell.likedAmount = (childSnapshot["likes"] as! Int)
+                    cell.likeButton.setTitle(" Likes • \(cell.likedAmount)", for: .normal)
                     cell.timeLabel.text = (childSnapshot["retailer"] as! String)
+                    cell.shareButton.setTitle(" Score • \(childSnapshot["score"] as! Int)", for: .normal)
+                    cell.timePostedLabel.text = "posted \(childSnapshot["time"] as! String)"
+                    
                     
                     let imgPath = (childSnapshot["image"] as! String)
                     let storage = Storage.storage()
@@ -66,6 +73,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
+        
+        
+        
+        let ref2 = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("liked")
+        ref2.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                let array = snapshot.children.allObjects
+                for obj in array {
+                    let snapshot:DataSnapshot = obj as! DataSnapshot
+                    if let childSnapshot = snapshot.value as? String
+                         {
+                        if "\(childSnapshot)" == self.filteredData[indexPath.row]/*childSnapshot["\(self.filteredData[indexPath.row]) as! String"] != nil*/ {
+                            cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+                            cell.likeButton.imageView?.tintColor = UIColor.black
+                            cell.likeButton.setTitle(" Likes • \(cell.likedAmount)", for: .normal)
+                            cell.likeButton.setTitleColor(UIColor.black, for: .normal)
+                        } else {
+                            cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                            cell.likeButton.imageView?.tintColor = UIColor.systemGray
+                            cell.likeButton.setTitle(" Likes • \(cell.likedAmount)", for: .normal)
+                            if cell.likedAmount != 0 {
+                                cell.likeButton.setTitle(" Likes • \(cell.likedAmount)", for: .normal)
+                            } else {
+                                cell.likeButton.setTitle(" Likes", for: .normal)
+                            }
+                            cell.likeButton.setTitleColor(UIColor.systemGray, for: .normal)
+                        }
+                    }
+                }
+            }
+        }
+        
+        
         if (!imageSet) {
             image = UIImage(named: "pickapicture")
         }
@@ -137,7 +178,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var data = ["No stores yet available!"]
     
     func refresh() {
-        let ref = Database.database().reference().child("Posts")
+        let ref = Database.database().reference().child("Posts").queryOrdered(byChild: "postRanking")
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard snapshot.exists() else { return }
             if(snapshot.exists()) {

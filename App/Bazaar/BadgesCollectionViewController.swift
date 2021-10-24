@@ -17,12 +17,17 @@ class BadgesCollectionViewController: UIViewController, UICollectionViewDataSour
     var filteredData: [String]!
     var data = ["No stores yet available!"]
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
         
         self.collectionView.showsVerticalScrollIndicator = false
 
@@ -87,14 +92,59 @@ class BadgesCollectionViewController: UIViewController, UICollectionViewDataSour
 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BadgesCollectionViewCell.identifier, for: indexPath) as? BadgesCollectionViewCell
         else { return UICollectionViewCell() }
+        var ref = Database.database().reference()
         
-        cell.badgeLabel.text = "Badge Name \(indexPath[1] + 1)"
+        if (indexPath.row == 0) {
+            cell.badgeImageView.image = UIImage(named: "treehug.jpg")
+            cell.badgeLabel.text = "Tree Hugger"
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("tree_hugger")
+        } else if (indexPath.row == 1) {
+            cell.badgeImageView.image = UIImage(named: "strongtogether.jpg")
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("stronger_together")
+            cell.badgeLabel.text = "Strong Together"
+        } else if (indexPath.row == 2) {
+            cell.badgeImageView.image = UIImage(named: "planetsaver.jpg")
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("planet_saver")
+            cell.badgeLabel.text = "Planet Saver"
+        } else if (indexPath.row == 3) {
+            cell.badgeImageView.image = UIImage(named: "clothes.jpg")
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("clothes_collector")
+            cell.badgeLabel.text = "Clothes Collector"
+        } else if (indexPath.row == 4) {
+            cell.badgeImageView.image = UIImage(named: "bestfriends.jpg")
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("best_friends")
+            cell.badgeLabel.text = "Best Friends"
+        } else if (indexPath.row == 5) {
+            cell.badgeImageView.image = UIImage(named: "bazaar.jpg")
+            
+            ref = Database.database().reference().child("Users").child("\(Auth.auth().currentUser!.uid)").child("Badges").child("going_bazaar")
+            cell.badgeLabel.text = "Bazaar Award"
+        }
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else { return }
+            if(snapshot.exists()) {
+                if let childSnapshot = snapshot.value as? [String : AnyObject]
+                     {
+                    if (childSnapshot["achieved"] as! Bool) {
+                        cell.blurView.alpha = 0
+                    } else {
+                        cell.blurView.alpha = 0.9
+                    }
+                    
+                }
+            }
+        }
         
         return cell
     }
@@ -110,6 +160,7 @@ class BadgesCollectionViewController: UIViewController, UICollectionViewDataSour
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
         return CGSize(width: size, height: size)
     }
+
     
     
 }

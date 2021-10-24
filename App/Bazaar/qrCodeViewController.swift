@@ -20,6 +20,9 @@ class qrCodeViewController: UIViewController {
         super.viewDidLoad()
         let uid = Auth.auth().currentUser?.uid as! String
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
+        
         let data = uid.data(using: String.Encoding.ascii)
         // 3
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return }

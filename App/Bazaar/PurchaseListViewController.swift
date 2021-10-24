@@ -53,6 +53,11 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
         self.tableView.showsVerticalScrollIndicator = false
         
         let refreshControl = UIRefreshControl()
@@ -77,7 +82,6 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
                     if let childSnapshot = snapshot.value as? [String : AnyObject]
                          {
                         self.data.append(childSnapshot["productId"] as! String)
-                        
                     }
                 }
             }
@@ -118,8 +122,6 @@ class PurchaseListViewController: UIViewController, UITableViewDataSource, UITab
         navigationController?.pushViewController(targetStoryboard, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    
     
 
 }
